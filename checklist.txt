@@ -1,6 +1,9 @@
 argoproj/argo-cd
 aws/aws-cli
+gocd/gocd
+grafana/grafana
 hashicorp/terraform
 helm/helm
 istio/istio
 kubernetes/kubernetes
+prometheus/prometheus
