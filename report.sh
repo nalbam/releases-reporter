@@ -50,10 +50,12 @@ _get_version() {
         return
     fi
 
+    CHART_URL="https://github.com/${CHART}/releases/tag/${NEW}"
+
     curl -sL opspresso.github.io/tools/slack.sh | bash -s -- \
         --token="${SLACK_TOKEN}" --emoji="gear" --color="good" --username="${REPONAME}" \
         --footer="<${CHART_URL}|${CHART}>" \
-        --title="helm-chart updated" \
+        --title="tools updated" \
         "\`${CHART}\`\n ${NOW} > ${NEW}"
 
     echo " slack ${CHART} ${NOW} > ${NEW} "
