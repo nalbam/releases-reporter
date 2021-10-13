@@ -1,0 +1,5 @@
+argoproj/argo-cd
+aws/aws-cli
+hashicorp/terraform
+helm/helm
+kubernetes/kubernetes
