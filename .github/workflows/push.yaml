@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Uses Container
-        uses: opspresso/action-builder@master
+        uses: opspresso/action-kube@master
 
       - name: Report
         env:
