@@ -2,4 +2,5 @@ argoproj/argo-cd
 aws/aws-cli
 hashicorp/terraform
 helm/helm
+istio/istio
 kubernetes/kubernetes
