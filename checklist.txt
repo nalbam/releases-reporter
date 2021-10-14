@@ -1,5 +1,5 @@
 argoproj/argo-cd argo
-aws/aws-cli aws
+aws/aws-cli
 gocd/gocd
 grafana/grafana
 hashicorp/terraform
