@@ -1,5 +1,5 @@
-argoproj/argo-cd
-aws/aws-cli
+argoproj/argo-cd argo
+aws/aws-cli aws
 gocd/gocd
 grafana/grafana
 hashicorp/terraform
@@ -7,3 +7,5 @@ helm/helm
 istio/istio
 kubernetes/kubernetes
 prometheus/prometheus
+hashicorp/terraform-provider-aws terraform
+hashicorp/terraform-provider-kubernetes terraform

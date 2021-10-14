@@ -33,6 +33,8 @@ _get_version() {
     REPO="$(echo ${CHART} | cut -d'/' -f1)"
     NAME="$(echo ${CHART} | cut -d'/' -f2)"
 
+    EMOJI="${2:-$NAME}"
+
     touch ${SHELL_DIR}/versions/${NAME}
     NOW="$(cat ${SHELL_DIR}/versions/${NAME} | xargs)"
 
@@ -50,11 +52,9 @@ _get_version() {
         return
     fi
 
-    CHART_URL="https://github.com/${CHART}/releases/tag/${NEW}"
-
     curl -sL opspresso.github.io/tools/slack.sh | bash -s -- \
-        --token="${SLACK_TOKEN}" --emoji="gear" --color="good" --username="${REPONAME}" \
-        --footer="<${CHART_URL}|${CHART}>" \
+        --token="${SLACK_TOKEN}" --emoji="${EMOJI}" --color="good" --username="${REPONAME}" \
+        --footer="<https://github.com/${CHART}/releases/tag/${NEW}|${CHART}>" \
         --title="tools updated" \
         "\`${CHART}\`\n ${NOW} > ${NEW}"
 
