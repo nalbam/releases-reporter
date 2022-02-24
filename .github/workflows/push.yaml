@@ -23,11 +23,11 @@ jobs:
         run: |
           bash ./report.sh
 
-      - name: Commit & Push
-        uses: opspresso/action-builder@master
-        with:
-          args: --commit
-        env:
-          GIT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MESSAGE_PATH: ./target/commit_message.txt
+      # - name: Commit & Push
+      #   uses: opspresso/action-builder@master
+      #   with:
+      #     args: --commit
+      #   env:
+      #     GIT_BRANCH: main
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     MESSAGE_PATH: ./target/commit_message.txt
