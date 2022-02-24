@@ -10,6 +10,5 @@ helm/helm
 istio/istio
 knative/serving knative
 kubernetes-sigs/aws-load-balancer-controller aws
-kubernetes/ingress-nginx
 kubernetes/kubernetes
 prometheus/prometheus
