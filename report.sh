@@ -11,8 +11,9 @@ REPONAME=$(echo "${REPOSITORY}" | cut -d'/' -f2)
 _init() {
   rm -rf ${SHELL_DIR}/.previous
 
-  mkdir ${SHELL_DIR}/target
-  mkdir ${SHELL_DIR}/versions
+  mkdir -p ${SHELL_DIR}/target
+  mkdir -p ${SHELL_DIR}/versions
+  mkdir -p ${SHELL_DIR}/.previous
 
   cp -rf ${SHELL_DIR}/versions ${SHELL_DIR}/.previous
 }
