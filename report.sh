@@ -15,7 +15,7 @@ _init() {
   mkdir -p ${SHELL_DIR}/versions
   mkdir -p ${SHELL_DIR}/.previous
 
-  cp -rf ${SHELL_DIR}/versions ${SHELL_DIR}/.previous
+  cp -rf ${SHELL_DIR}/versions/* ${SHELL_DIR}/.previous/
 }
 
 _check() {
@@ -36,25 +36,29 @@ _get_versions() {
   curl -sL https://api.github.com/repos/${CHART}/releases | jq '.[].tag_name' -r | grep -v '-' | head -10 \
     >${SHELL_DIR}/versions/${NAME}
 
-  while read V1; do
-    if [ -z "$V1" ]; then
-      continue
-    fi
-
-    EXIST="false"
-    while read V2; do
-      if [ "$V1" == "$V2" ]; then
-        EXIST="true"
-        # echo "# ${NAME} ${V1} EXIST"
+  if [ -f ${SHELL_DIR}/versions/${NAME} ]; then
+    while read V1; do
+      if [ -z "$V1" ]; then
         continue
       fi
-    done <${SHELL_DIR}/.previous/${NAME}
 
-    if [ "$EXIST" == "false" ]; then
-      # send slack message
-      _slack "$V1"
-    fi
-  done <${SHELL_DIR}/versions/${NAME}
+      EXIST="false"
+      if [ -f ${SHELL_DIR}/.previous/${NAME} ]; then
+        while read V2; do
+          if [ "$V1" == "$V2" ]; then
+            EXIST="true"
+            # echo "# ${NAME} ${V1} EXIST"
+            continue
+          fi
+        done <${SHELL_DIR}/.previous/${NAME}
+      fi
+
+      if [ "$EXIST" == "false" ]; then
+        # send slack message
+        _slack "$V1"
+      fi
+    done <${SHELL_DIR}/versions/${NAME}
+  fi
 }
 
 _slack() {
