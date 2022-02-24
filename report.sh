@@ -14,7 +14,7 @@ _init() {
   mkdir -p ${SHELL_DIR}/.previous
   mkdir -p ${SHELL_DIR}/versions
 
-  cp -rf ${SHELL_DIR}/versions ${SHELL_DIR}/.previous/
+  cp -rf ${SHELL_DIR}/versions ${SHELL_DIR}/.previous
 }
 
 _check() {
@@ -40,17 +40,20 @@ _get_versions() {
     >${SHELL_DIR}/versions/${NAME}
 
   while read V1; do
+    if [ -z "$V1" ]; then
+      continue
+    fi
+
     EXIST="false"
     while read V2; do
       if [ "$V1" == "$V2" ]; then
         EXIST="true"
+        continue
       fi
     done <${SHELL_DIR}/.previous/${NAME}
 
     if [ "$EXIST" == "false" ]; then
-      VERSION="$V1"
-
-      echo "# ${NAME} ${VERSION}"
+      echo "# ${NAME} ${V1}"
     fi
   done <${SHELL_DIR}/versions/${NAME}
 
