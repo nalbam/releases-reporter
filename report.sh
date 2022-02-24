@@ -17,14 +17,10 @@ _init() {
 }
 
 _check() {
-  # printf '# %-50s %-20s %-20s\n' "NAME" "NOW" "NEW"
-
   # check versions
   while read LINE; do
     _get_versions ${LINE}
   done <${SHELL_DIR}/checklist.txt
-
-  echo
 }
 
 _get_versions() {
@@ -57,8 +53,6 @@ _get_versions() {
       _slack "$V1"
     fi
   done <${SHELL_DIR}/versions/${NAME}
-
-  echo
 }
 
 _slack() {
@@ -72,10 +66,9 @@ _slack() {
     --token="${SLACK_TOKEN}" --emoji="${EMOJI}" --color="good" --username="${REPONAME}" \
     --footer="<https://github.com/${CHART}/releases/tag/${VERSION}|${CHART}>" \
     --title="tools updated" \
-    "\`${CHART}\`\n${VERSION}"
+    "\`${CHART}\`\n > ${VERSION}"
 
   echo "# slack ${CHART} ${VERSION}"
-  echo
 }
 
 _message() {
