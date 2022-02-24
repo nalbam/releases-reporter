@@ -66,7 +66,7 @@ _slack() {
     --token="${SLACK_TOKEN}" --emoji="${EMOJI}" --color="good" --username="${REPONAME}" \
     --footer="<https://github.com/${CHART}/releases/tag/${VERSION}|${CHART}>" \
     --title="tools updated" \
-    "\`${CHART}\`\n > ${VERSION}"
+    "\`${CHART}\`\n :zap: ${VERSION}"
 
   echo "# slack ${CHART} ${VERSION}"
 }
