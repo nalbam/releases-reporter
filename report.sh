@@ -11,14 +11,11 @@ REPONAME=$(echo "${REPOSITORY}" | cut -d'/' -f2)
 _init() {
   rm -rf ${SHELL_DIR}/.previous
 
-  mkdir -p ${SHELL_DIR}/.previous
-  mkdir -p ${SHELL_DIR}/versions
-
   cp -rf ${SHELL_DIR}/versions ${SHELL_DIR}/.previous
 }
 
 _check() {
-  printf '# %-50s %-20s %-20s\n' "NAME" "NOW" "NEW"
+  # printf '# %-50s %-20s %-20s\n' "NAME" "NOW" "NEW"
 
   # check versions
   while read LINE; do
@@ -48,6 +45,7 @@ _get_versions() {
     while read V2; do
       if [ "$V1" == "$V2" ]; then
         EXIST="true"
+        echo "# ${NAME} ${V1} EXIST"
         continue
       fi
     done <${SHELL_DIR}/.previous/${NAME}
