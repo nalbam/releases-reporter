@@ -12,6 +12,7 @@ _init() {
   rm -rf ${SHELL_DIR}/.previous
 
   mkdir ${SHELL_DIR}/target
+  mkdir ${SHELL_DIR}/versions
 
   cp -rf ${SHELL_DIR}/versions ${SHELL_DIR}/.previous
 }
