@@ -11,7 +11,7 @@ REPONAME=$(echo "${REPOSITORY}" | cut -d'/' -f2)
 _init() {
   rm -rf ${SHELL_DIR}/.previous
 
-  mkdir ${SHELL_DIR}/.target
+  mkdir ${SHELL_DIR}/target
 
   cp -rf ${SHELL_DIR}/versions ${SHELL_DIR}/.previous
 }
@@ -47,51 +47,34 @@ _get_versions() {
     while read V2; do
       if [ "$V1" == "$V2" ]; then
         EXIST="true"
-        echo "# ${NAME} ${V1} EXIST"
+        # echo "# ${NAME} ${V1} EXIST"
         continue
       fi
     done <${SHELL_DIR}/.previous/${NAME}
 
     if [ "$EXIST" == "false" ]; then
-      echo "# ${NAME} ${V1}"
+      # send slack message
+      _slack "$V1"
     fi
   done <${SHELL_DIR}/versions/${NAME}
 
   echo
 }
 
-_get_version() {
-  CHART="$1"
-
-  REPO="$(echo ${CHART} | cut -d'/' -f1)"
-  NAME="$(echo ${CHART} | cut -d'/' -f2)"
-
-  EMOJI="${2:-$NAME}"
-
-  touch ${SHELL_DIR}/versions/${NAME}
-  NOW="$(cat ${SHELL_DIR}/versions/${NAME} | xargs)"
-
-  NEW="$(curl -s https://api.github.com/repos/${CHART}/releases | grep tag_name | cut -d'"' -f4 | grep -v '-' | sort -V -r | head -1)"
-
-  printf '# %-50s %-20s %-20s\n' "${CHART}" "${NOW}" "${NEW}"
-
-  printf "${NEW}" >${SHELL_DIR}/versions/${NAME}
-
-  if [ "${NOW}" == "${NEW}" ]; then
-    return
-  fi
-
+_slack() {
   if [ -z "${SLACK_TOKEN}" ]; then
     return
   fi
 
+  VERSION="$1"
+
   curl -sL opspresso.github.io/tools/slack.sh | bash -s -- \
     --token="${SLACK_TOKEN}" --emoji="${EMOJI}" --color="good" --username="${REPONAME}" \
-    --footer="<https://github.com/${CHART}/releases/tag/${NEW}|${CHART}>" \
+    --footer="<https://github.com/${CHART}/releases/tag/${VERSION}|${CHART}>" \
     --title="tools updated" \
-    "\`${CHART}\`\n ${NOW} > ${NEW}"
+    "\`${CHART}\`\n${VERSION}"
 
-  echo " slack ${CHART} ${NOW} > ${NEW} "
+  echo "# slack ${CHART} ${VERSION}"
   echo
 }
 
