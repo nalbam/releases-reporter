@@ -1,4 +1,5 @@
 argoproj/argo-cd argo
+argoproj/argo-workflows argo
 aws/aws-cli
 aws/aws-node-termination-handler aws
 gocd/gocd
