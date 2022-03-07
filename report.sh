@@ -38,7 +38,7 @@ _get_versions() {
 
   COUNT=$(cat ${SHELL_DIR}/target/${NAME} | wc -l | xargs)
 
-  if ["x${COUNT}" != "x0" ]; then
+  if [ "x${COUNT}" != "x0" ]; then
     cp -rf ${SHELL_DIR}/target/${NAME} ${SHELL_DIR}/versions/${NAME}
 
     while read V1; do
