@@ -74,7 +74,7 @@ _slack() {
   VERSION="$1"
 
   curl -sL opspresso.github.io/tools/slack.sh | bash -s -- \
-    --token="${SLACK_TOKEN}" --emoji="${EMOJI}" --color="good" --username="${REPONAME}" \
+    --token="${SLACK_TOKEN}" --emoji="${EMOJI}" --color="good" --username="${NAME} ${REPONAME}" \
     --footer="<https://github.com/${CHART}/releases/tag/${VERSION}|${CHART}>" \
     --title="tools updated" \
     "\`${CHART}\`\n :label: ${VERSION}"
