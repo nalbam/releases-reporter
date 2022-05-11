@@ -33,13 +33,14 @@ _get_versions() {
 
   EMOJI="${2:-$NAME}"
 
-  curl -sL https://api.github.com/repos/${CHART}/releases | jq '.[].tag_name' -r | grep -v '-' | head -10 \
+  curl -sL https://api.github.com/repos/$CHART/releases | jq '.[].tag_name' -r | grep -v '-' \
     >${SHELL_DIR}/target/${NAME}
 
   COUNT=$(cat ${SHELL_DIR}/target/${NAME} | wc -l | xargs)
 
   if [ "x${COUNT}" != "x0" ]; then
     cp -rf ${SHELL_DIR}/target/${NAME} ${SHELL_DIR}/versions/${NAME}
+    cat ${SHELL_DIR}/versions/${NAME} | head -5 >${SHELL_DIR}/target/${NAME}
 
     while read V1; do
       if [ -z "$V1" ]; then
@@ -61,7 +62,7 @@ _get_versions() {
         # send slack message
         _slack "$V1"
       fi
-    done <${SHELL_DIR}/versions/${NAME}
+    done <${SHELL_DIR}/target/${NAME}
   fi
 }
 
