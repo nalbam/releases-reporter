@@ -1,12 +1,8 @@
 argoproj/argo-cd argo
-argoproj/argo-workflows argo
-aws/aws-node-termination-handler aws
-grafana/grafana
+awslabs/amazon-eks-ami aws-cli
 hashicorp/terraform
 hashicorp/terraform-provider-aws terraform
 hashicorp/terraform-provider-kubernetes terraform
-helm/helm
 istio/istio
-kubernetes-sigs/aws-load-balancer-controller aws
 kubernetes/kubernetes
-prometheus/prometheus
+terraform-aws-modules/terraform-aws-eks terraform

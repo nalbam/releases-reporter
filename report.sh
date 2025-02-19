@@ -97,7 +97,7 @@ _commit() {
   git config --global user.email "${GIT_USEREMAIL}"
 
   git add .
-  git commit -m "report $(date +%Y%m%d-%H%M)"
+  git commit -m "report $(date +%Y%m%d-%H%M) ${GITHUB_RUN_NUMBER}"
 
   git push -q https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git main
 }
